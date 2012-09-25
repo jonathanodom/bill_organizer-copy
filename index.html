@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<!--Jonathan Odom
+	Bill Organizer Gold 1.0
+ -->
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="description" content="My first mobile web app." />
+		<meta name="keywords" content="html5, mobile development, full sail university" />
+		<!--for robots-->
+		<meta name="robots" content="noindex, nofollow" />
+		<!--for iphones-->
+		<meta name="viewport" content="user-scalable=no, width=device-width" />
+		<!--for androids-->
+		<meta name="viewport" content="target-densitydpi=device-dpi" />
+		<!--for older devices-->
+		<meta name="MobileOptimized" content="320" />
+
+		<title>Bill Organizer: Gold</title>
+
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" />
+		<link rel="stylesheet" href="themes/jquerymobile-theme1.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/jquery-ui-1.8.22.custom.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+
+
+	</head>
+	<body>
+
+<!-- begin home page -->
+		<div data-role="page" id="home" data-theme="b">
+			<!-- header bar -->
+			<div data-role="header" data-position="fixed" data-theme="b"> 
+				<h1>Bill Organizer</h1>
+			</div>
+			<!-- header bar -->
+			<!-- header image -->
+			<div id="headerlogo">
+				<h1><a href="#additemPage"><img src="images/header.png"></a></h1>
+			</div>
+			<!-- header image -->
+			<div id="description">
+				<p>A way to help you organize your bills and finances in one place. Just add bills that need organizing.</p>
+			</div>
+			<!-- description -->
+			<div id="accordion">
+				<h3><a href="#">View Bills</a></h3>
+					
+						<div><p>Saved bills that have not been paid will show in this section.  Check History for paid bills.</p>
+							<a href="#" id="clearData" data-theme="b">Clear Stored Data!</a>
+							<div data-role="collapsible">
+								<h3><a href="#" id="displayLinkPaid">Saved Bills</a></h3>
+								<div id="searchbox">
+									<form id="live-search" action="" class="styled" method="post">
+									    <fieldset>
+									        <input type="search" class="text-input" id="filter" value="" data-mini="true" placeholder="Search for a saved bill!" />
+									        <span id="filter-count"></span>
+									    </fieldset>
+									</form>
+								</div>
+								<div id="view"></div>
+							</div>
+						</div>
+				<h3><a href="#">History</a></h3>
+					<div>
+						<p>Feature Coming Soon! Paid bills will show in this section.</p>
+						<div data-role="collapsible">
+								<h3><a href="#" id="displayLinkHistory">Saved Bills</a></h3>
+								<div id="searchbox">
+									<form id="live-search" action="" class="styled" method="post">
+									    <fieldset>
+									        <input type="search" class="text-input" id="filter" value="" data-mini="true" placeholder="Search for a saved bill!" />
+									        <span id="filter-count"></span>
+									    </fieldset>
+									</form>
+								</div>
+								<div id="viewPaid"></div>
+							</div>
+					</div>
+				<h3><a href="#">Budget</a></h3>
+					<div>
+						<p>Feature Coming Soon!</p>
+					</div>
+			</div>
+			<h2>Past Dues Bills!</h2>
+			<p>Oldest past due bill will display at top. If paid click edit and mark paid.</p>
+			<div id="upcoming">
+
+			</div>	
+			<!-- nav buttons -->
+			<!-- footer -->
+			<div data-role="footer" data-id="foo1" data-position="fixed" data-theme="b">
+				<div data-role="navbar">
+					<ul>
+						<li><a href="#additemPage" id="additem"     data-role="button" data-icon="plus"  data-iconpos="top">Add A Bill</a></li>
+						<li><a href="#calendar"    id="calendar"	data-role="button" data-icon="info"  data-iconpos="top">Calendar</a></li>
+						<li><a href="#about" id="about" data-role="button" data-icon="info" data-iconpos="top">About Us</a></li>
+					</ul>
+				</div><!-- /navbar -->
+			</div><!-- /footer -->
+		</div>
+<!--home page ends-->
+
+<!-- begin add item page -->
+		<div data-role="page" id="additemPage" data-theme="b">
+			<!-- header bar -->
+			<div data-role="header" data-position="fixed" data-theme="b"> 
+				<a href="index.html" data-icon="home">Home</a>
+				<h1>Bill Organizer</h1>
+			</div>
+			<!-- header bar -->
+			<!-- header image -->
+			<div id="headerlogo">
+				<h1><a href="additem.html"><img src="images/header.png"></a></h1>
+			</div>
+			<!-- header image -->
+			<!-- content -->
+			<div>
+				<h1>Enter Upcoming Bill!</h1>
+				<!-- <nav><a href="additem.html" id="clearData">Clear Stored Data!</a> | <a href="#" id="displayLink">See All The Bills Entered!</a><a href="additem.html" id="addNew" style="display: none;">Add Another Bill!</a> </nav> -->
+				<form id="billForm" data-mini="true">
+					<fieldset>
+						<div id="errors"></div>
+						<ul class="a">
+							<div><label for="bname">Name of Bill:</label><input type="text" class="required" id="bname"  data-mini="true" placeholder="TXU, AT&T, Dish, Sprint, Etc"/></div>
+							<div id="select" data-native-menu="false"><label for="billTypes">Bill Type:</label></div>
+							<div><label for="duedate"> Due Date: </label><input type="date" id="datepicker"  data-mini="true"/></div>
+							<div><label for="reminder"> Remind Me: <input type="range" name="reminder"min="0" max="30" step="1" value="3" id="reminder" data-mini="true" /></label>Days Before Due.</div>
+								<div >
+									<fieldset data-role="controlgroup" data-type="horizontal" >
+										<label for="priority"><legend>Priority:</legend></label>
+										<input type="radio" value="High" id="High" name="priority"  data-mini="true"/><label for="High">High</label>
+										<input type="radio" checked="checked" value="Medium" id="Medium" name="priority" data-mini="true" /><label for="Medium">Medium</label>
+										<input type="radio" value="Low" id="Low" name="priority" data-mini="true" /><label for="Low">Low</label>
+								</div>
+								
+							<div><label for="amount"> Amount: $</label><input type="number"  id="amount" step="0.01" data-mini="true" placeholder="123.45" /></div>
+							<div data-role="fieldcontain">
+								<label for="flip-2">Paid:</label>
+									<select name="flip-2" id="flip-2" data-role="slider" data-mini="true">
+										<option value="Nope">Nope</option>
+										<option value="Yep">Yep</option>
+									</select> 
+							</div>
+							<div><label for="notes"> Notes: </label>
+							<textarea  data-mini="true" id="notes" placeholder="Add additional information here."></textarea></div>
+						</ul>
+					</fieldset>
+					<input type="submit" value="SAVE IT!" id="submit"/>
+				</form>
+			</div>
+			<div id="viewIn">
+
+			</div>
+			<!-- content ends -->
+
+			<!-- footer -->
+			<div data-role="footer" data-id="foo1" data-position="fixed">
+				<div data-role="navbar">
+					<ul>
+						<li><a href="#" id="clearData2" data-theme="b">Clear Stored Data!</a></li>
+						<li><a href="#viewbill" id="displayLinkForm" data-theme="b">See All The Bills Entered!</a></li>
+						<li><a href="#about" id="about" data-theme="b">About!</a></li>
+					</ul>
+				</div><!-- /navbar -->
+			</div>
+			<!-- /footer -->
+		</div>
+<!-- end of add item page -->
+
+<!--  begin calendar page -->
+		<div data-role="page" id="calendar"  data-theme="b">
+			<!-- header bar -->
+			<div data-role="header" data-position="fixed" data-theme="b"> 
+				<a href="index.html" data-icon="home">Home</a>
+				<h1>Bill Organizer</h1>
+			</div>
+			<!-- header bar -->
+			<!-- header image -->
+			<div id="headerlogo">
+				<h1><a href="additem.html"><img src="images/header.png"></a></h1>
+			</div>
+			<!-- header image -->
+			<!-- calendar table begins -->
+			<div>
+				<h2>Feature Coming Soon!</h2>
+			</div>
+			<!-- calender table ends -->
+			<!-- footer -->
+			<div data-role="footer" data-id="foo1" data-position="fixed" data-theme="b">
+				<div data-role="navbar">
+					<ul>
+						<li><a href="#about" id="about" data-theme="b" >About Us!</a></li>
+					</ul>
+				</div><!-- /navbar -->
+			</div><!-- /footer -->
+		</div>
+<!-- end of calender page -->
+
+<!-- about us page begin -->
+		<div data-role="page" id="about" data-theme="b">
+			<!-- header bar -->
+			<div data-role="header" data-position="fixed" data-theme="b"> 
+				<!-- <a href="index.html" data-icon="home">Home</a> -->
+				<h1>Bill Organizer</h1>
+			</div>
+			<!-- header bar -->
+			<div id="headerlogo"><!-- header image -->
+				<h1><a href="additem.html"><img src="images/header.png"></a></h1>
+			</div>
+			<!-- header image -->
+			<!-- content -->
+			<div id="about">
+				<h1>About Us</h1>
+				<p>This App was designed and developed by Jonathan Odom. Category images from Chronicle-Bill Management app from Mac App Store<a href="http://itunes.apple.com/us/app/chronicle/id402355593?mt=12" target="_blank">Chronicle</a></p>
+					<div class="ui-grid-a">	
+
+						<div class="ui-block-a"><a href="http://jonathanodom.github.com/MiU_1208/week_4/Bronze/" data-role="button" target="_blank">Bronze App</a></div>
+						<div class="ui-block-b"><a href="http://jonathanodom.github.com/MiU_1208/week_4/Gold/" data-role="button" target="_blank">Gold App</a></div>
+					
+					</div>
+						<div class="ui-grid-solo">
+							<div class="ui-block-a"><a href="https://github.com/jonathanodom/MiU_1208.git" data-role="button" target="_blank">Source</a></div>
+						</div>
+			</div>
+			<!-- content -->
+			<!-- footer -->
+			<div data-role="footer" data-id="foo1" data-position="fixed" data-theme="b">
+				<div data-role="navbar">
+					<ul>
+						<li><a href="#home" id="home" >Home</a></li>
+					</ul>
+				</div><!-- /navbar -->
+			</div>
+			<!-- /footer -->
+		</div>
+<!-- about page end -->
+<!-- dialog page -->
+		<!-- div data-role="dialog" id="" data-theme="b"> -->
+			<!-- header bar -->
+			<!-- <div data-role="header" data-position="fixed" data-theme="b">  -->
+				<!-- <h1>About Us</h1> -->
+			<!-- </div> -->
+			<!-- header bar -->
+			<!-- <div id="errors"></div> -->
+		<!-- </div>  -->
+
+		<script type="text/javascript" src="js/libs/jquery-1.7.2.js"></script>
+		<script type="text/javascript" src="js/libs/jquery-ui-1.8.22.custom.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
+		<script type="text/javascript" src="js/libs/jquery.validate.min.js"></script>
+		<!-- <script type="text/javascript" src="http://dl.dropbox.com/u/40036711/Scripts/ddslick.js"></script> -->
+		<script type="text/javascript" src="js/json.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+	</body>
+</html>

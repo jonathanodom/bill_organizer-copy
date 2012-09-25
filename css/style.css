@@ -1,0 +1,25 @@
+/*
+	Jonathan Odom
+	VFW 1205
+	assignment 2 
+	css file
+*/
+
+
+nav{
+	text-align: center;
+}
+#description{
+	text-align: center;
+}
+#headerlogo{
+	text-align: center;
+a{
+	color: white;
+}
+h2{
+	text-align: center;
+}
+#upcoming{
+	text-align: center;
+}
